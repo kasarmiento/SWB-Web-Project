@@ -1,0 +1,52 @@
+#main_editor {
+    float:left;
+    position:relative;
+    left:50%;
+}
+
+#main_editor h2 {
+    position:relative;
+    left:-50%;
+}
+
+#canvas {
+    background-image: url('../img/bsc1.jpg');
+    float:left;
+    position:relative;
+    left:-50%;
+}
+
+#toolbox {
+    float:left;
+    position:relative;
+    left:-50%;
+}
+
+.tools div {
+	cursor:pointer;
+	margin:4px 0 0;
+	color:#1D72C2;
+    width:50px;
+	background-color:#D4ECFF;
+	border:1px solid #57B6FF;
+	text-align:center;
+	text-decoration:none;
+}
+
+.tools div.disabled {
+	text-decoration:none;
+	color:#666;
+	background-color:#eee;
+	border:1px solid #ccc;
+}
+
+.tools div.selected {
+	font-weight:bold;
+}
+
+.tools div._title {
+	cursor:default;
+	color:#666;
+	background-color:transparent;
+	border-color:transparent;
+}
