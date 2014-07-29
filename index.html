@@ -6,85 +6,45 @@
     <script type="text/javascript" src="js/raphael.min.js"></script>
     <script type="text/javascript" src="js/json2.js"></script>
     <script type="text/javascript" src="js/raphael.sketchpad.js"></script>
-    <!-- END Necessary javascript files for Raphael paint component -->
 
     <title>Identifying Microbiological Soil Crusts</title>
 
-    <style>
-
-        #editor {
-            background-image: url('bsc1.jpg');
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .tools div {
-			cursor:pointer;
-			margin:4px 0 0;
-			color:#1D72C2;
-			background-color:#D4ECFF;
-			border:1px solid #57B6FF;
-			text-align:center;
-			text-decoration:none;
-		}
-
-		.tools div.disabled {
-			text-decoration:none;
-			color:#666;
-			background-color:#eee;
-			border:1px solid #ccc;
-		}
-
-		.tools div.selected {
-			font-weight:bold;
-		}
-
-		.tools div._title {
-			cursor:default;
-			color:#666;
-			background-color:transparent;
-			border-color:transparent;
-		}
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
 
 </head>
 <body>
 
     <!-- Main picture editor -->
-    <h2 align="center">Identifying Microbiological Soil Crusts</h2>
-    <div id="editor" class="widget" style="height:467px; width:467px"></div>
-    <input type="hidden" id="drawingData" name="drawingData" />
+    <div id="main_editor">
+        <h2>Identifying Microbiological Soil Crusts</h2>
 
-    <div class="tools">
-        <div class="_title">Color</div>
-        <div id="editor_green" class="selected">Green</div>
-        <div id="editor_fuschia">Fuschia</div>
+        <div id="canvas" style="height:467px; width:467px"></div>
+        <input type="hidden" id="drawingData" name="drawingData" />
+
+        <div id="toolbox">
+            <div class="tools">
+                <div id="editor_pen" class="selected">Pen</div>
+                <div id="editor_thin" class="selected">Thin</div>
+                <div id="editor_thick">Thick</div>
+            </div>
+            <br />
+            <div class="tools">
+                <div id="editor_eraser">Eraser</div>
+                <div id="editor_undo" class="disabled">Undo</div>
+                <div id="editor_redo" class="disabled">Redo</div>
+            </div>
+            <br />
+            <div class="tools inline">
+                <div id="editor_clear" class="disabled">Clear</div>
+            </div>
+        </div>
+
     </div>
-
-    <div class="tools">
-        <div class="_title">Width</div>
-        <div id="editor_thin" class="selected">Thin</div>
-        <div id="editor_thick">Thick</div>
-    </div>
-
-    <div class="tools">
-        <div id="editor_undo" class="disabled">Undo</div>
-        <div id="editor_redo" class="disabled">Redo</div>
-        <div id="editor_clear" class="disabled">Clear</div>
-    </div>
-
-    <div class="clear"></div>
-
-    <div class="tools">
-        <div id="editor_draw_erase">Draw</div>
-    </div>
-
 
 
     <script type="text/javascript">
 	    $(document).ready(function() {
-		    var sketchpad = Raphael.sketchpad("editor", {
+		    var sketchpad = Raphael.sketchpad("canvas", {
 			    height: 467,
 			    width: 467,
 			    editing: true	// true is default
@@ -134,22 +94,14 @@
 			    sketchpad.pen().width(15);
 		    });
 
-		    $("#editor_green").click(function() {
-			    select("#editor_green", "#editor_fuschia");
+		    $("#editor_pen").click(function() {
+			    select("#editor_pen", "#editor_eraser");
 			    sketchpad.pen().color("#0f0");
 		    });
 
-		    $("#editor_fuschia").click(function() {
-			    select("#editor_fuschia", "#editor_green");
-			    sketchpad.pen().color("#ff00ff");
-		    });
-
-		    $("#editor_draw_erase").toggle(function() {
-			    $(this).text("Erase");
-			    sketchpad.editing("erase");
-		    }, function() {
-			    $(this).text("Draw");
-			    sketchpad.editing(true);
+		    $("#editor_eraser").click(function() {
+			    select("#editor_eraser", "#editor_pen");
+			    sketchpad.pen().color("#fff");
 		    });
 
 		    function update_actions() {
