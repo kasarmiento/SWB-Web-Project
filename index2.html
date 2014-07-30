@@ -1,0 +1,167 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+	<!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	
+    <!-- Necessary javascript files for Raphael paint component -->
+    <<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/raphael.min.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/raphael.sketchpad.js"></script>
+
+    <title>Identifying Microbiological Soil Crusts</title>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+</head>
+<body>
+	<div class="container">
+	<div class="page-header">
+		<h2 class="text-center">Identifying Microbiological Soil Crusts</h2>
+	</div>
+    <!-- Main picture editor -->
+    <div id="main_editor">
+
+        <div id="canvas" style="height:467px; width:467px"></div>
+        <input type="hidden" id="drawingData" name="drawingData" />
+
+        <div id="toolbox">
+            <div class="tools">
+                <div id="editor_pen" class="selected">Pen</div>
+                <div id="editor_thin" class="selected">Thin</div>
+                <div id="editor_thick">Thick</div>
+            </div>
+            <br />
+            <div class="tools">
+                <div id="editor_eraser">Eraser</div>
+                <div id="editor_undo" class="disabled">Undo</div>
+                <div id="editor_redo" class="disabled">Redo</div>
+            </div>
+            <br />
+            <div class="tools inline">
+                <div id="editor_clear" class="disabled">Clear</div>
+            </div>
+        </div>
+
+	</div>
+	</div>
+
+    <script type="text/javascript">
+	    $(document).ready(function() {
+		    var sketchpad = Raphael.sketchpad("canvas", {
+			    height: 467,
+			    width: 467,
+			    editing: true	// true is default
+		    });
+		
+		
+		    // When the sketchpad changes, update the input field.
+		    sketchpad.change(function() {
+			    $("#drawingData").val(sketchpad.json());
+		    });
+
+		    sketchpad.pen().color("#0f0");
+
+            // This function toggles a button from "enabled" to "disabled"
+		    function enable(element, enable) {
+			    if (enable) {
+				    $(element).removeClass("disabled");
+			    } else {
+				    $(element).addClass("disabled");
+			    }
+		    };
+
+		    function select(element1, element2) {
+			    $(element1).addClass("selected");
+			    $(element2).removeClass("selected");
+		    }
+
+		    $("#editor_undo").click(function() {
+			    sketchpad.undo();
+		    });
+
+		    $("#editor_redo").click(function() {
+			    sketchpad.redo();
+		    });
+
+		    $("#editor_clear").click(function() {
+			    sketchpad.clear();
+		    });
+
+		    $("#editor_thin").click(function() {
+			    select("#editor_thin", "#editor_thick");
+			    sketchpad.pen().width(5);
+		    });
+
+		    $("#editor_thick").click(function() {
+			    select("#editor_thick", "#editor_thin");
+			    sketchpad.pen().width(15);
+		    });
+
+		    $("#editor_pen").click(function() {
+			    select("#editor_pen", "#editor_eraser");
+				sketchpad.editing(true);
+			    //sketchpad.pen().color("#0f0");
+		    });
+
+		    $("#editor_eraser").click(function() {
+			    select("#editor_eraser", "#editor_pen");
+			    sketchpad.editing("erase");
+		    });
+
+		    function update_actions() {
+			    enable("#editor_undo", sketchpad.undoable());
+			    enable("#editor_redo", sketchpad.redoable());
+			    enable("#editor_clear", sketchpad.strokes().length > 0);
+		    }
+
+		    sketchpad.change(update_actions);
+
+		    update_actions();
+	    });
+    </script>
+
+    <!--
+
+	    <h2>My Sketch Editor</h2>
+	
+	    <div style="height:260px;" class="widget">
+		    <div id="sketchpad_editor"></div>
+	    </div>
+
+
+	    <form action="save.php" method="post">
+		    <input type="hidden" name="data" />
+		    <input type="submit" value="Save" />
+	    </form>
+	
+	    <script type="text/javascript">
+		    var paper = Raphael(10,10,300,300);
+		    var sketchpad_editor = Raphael.sketchpad(paper, {
+			    width: 400,
+			    height: 400,
+			    editing: true
+		    });
+	    </script>
+	
+    -->
+	
+	
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
