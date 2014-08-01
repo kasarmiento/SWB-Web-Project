@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,13 +16,14 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	
+    
     <!-- Necessary javascript files for Raphael paint component -->
-    <<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/raphael.min.js"></script>
     <script type="text/javascript" src="js/json2.js"></script>
     <script type="text/javascript" src="js/raphael.sketchpad.js"></script>
 
+    
     <title>Identifying Microbiological Soil Crusts</title>
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -32,32 +34,35 @@
 	<div class="page-header">
 		<h2 class="text-center">Identifying Microbiological Soil Crusts</h2>
 	</div>
+    <div class="jumbotron">
     <!-- Main picture editor -->
-    <div id="main_editor">
+        <div id="main_editor">
 
-        <div id="canvas" style="height:467px; width:467px"></div>
-        <input type="hidden" id="drawingData" name="drawingData" />
+            <div id="canvas" style="height:467px; width:467px"></div>
+            <input type="hidden" id="drawingData" name="drawingData" />
 
-        <div id="toolbox">
-            <div class="tools">
-                <div id="editor_pen" class="selected">Pen</div>
-                <div id="editor_thin" class="selected">Thin</div>
-                <div id="editor_thick">Thick</div>
+            <div id="toolbox">
+                <div class="tools">
+                    <div id="editor_pen" class="selected">Pen</div>
+                    <div id="editor_thin" class="selected">Thin</div>
+                    <div id="editor_thick">Thick</div>
+                </div>
+                <br />
+                <div class="tools">
+                    <div id="editor_eraser">Eraser</div>
+                    <div id="editor_undo" class="disabled">Undo</div>
+                    <div id="editor_redo" class="disabled">Redo</div>
+                </div>
+                <br />
+                <div class="tools inline">
+                    <div id="editor_clear" class="disabled">Clear</div>
+                </div>
             </div>
-            <br />
-            <div class="tools">
-                <div id="editor_eraser">Eraser</div>
-                <div id="editor_undo" class="disabled">Undo</div>
-                <div id="editor_redo" class="disabled">Redo</div>
-            </div>
-            <br />
-            <div class="tools inline">
-                <div id="editor_clear" class="disabled">Clear</div>
-            </div>
-        </div>
 
-	</div>
-	</div>
+	   </div>
+        
+    </div>
+    </div>
 
     <script type="text/javascript">
 	    $(document).ready(function() {
@@ -159,9 +164,6 @@
 	
     -->
 	
-	
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>
