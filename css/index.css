@@ -15,6 +15,12 @@
     position:relative;
 /*    left:-50%; */
 }
+#viewer {
+    background-image: url('../img/bsc1.jpg');
+    float:left;
+    position:relative;
+/*    left:-50%; */
+}
 
 #toolbox {
 	float:right;

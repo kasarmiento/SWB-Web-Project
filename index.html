@@ -35,30 +35,11 @@
 		<h2 class="text-center">Identifying Microbiological Soil Crusts</h2>
 	</div>
     <div class="jumbotron">
-    <!-- Main picture editor -->
+		<!-- Main sketchpad editor -->
         <div class="container">
 
-            <div id="canvas" style="height:467px; width:467px"></div>
-            <input type="hidden" id="drawingData" name="drawingData" />
+            <div id="canvas" style="height:467px; width:467px;"></div>
 
-<!--             <div id="toolbox">
-                <div class="tools">
-                    <div id="editor_pen" class="selected">Pen</div>
-                    <div id="editor_thin" class="selected">Thin</div>
-                    <div id="editor_thick">Thick</div>
-                </div>
-                <br />
-                <div class="tools">
-                    <div id="editor_eraser">Eraser</div>
-                    <div id="editor_undo" class="disabled">Undo</div>
-                    <div id="editor_redo" class="disabled">Redo</div>
-                </div>
-                <br />
-                <div class="tools inline">
-                    <div id="editor_clear" class="disabled">Clear</div>
-                </div>
-            </div> -->
-			
 			<div class="btn-group-vertical">
 				<button id="editor_pen" type="button" class="btn btn-default active">Pen</button>
 				<button id="editor_thin" type="button" class="btn btn-default active">Thin</button>
@@ -71,17 +52,22 @@
 				<button id="editor_redo" type="button" class="btn btn-default">Redo</button>
 			</div>
 			<br><br>
-			<div class="btn-group-vertical">
-				<button id="editor_clear" type="button" class="btn btn-default">Clear</button>
-			</div>
+			<button id="editor_clear" type="button" class="btn btn-default">Clear</button>
 		</div>
-        
-    </div>
-	<div id="main_editor">
+		<br>
+		<!-- json result text box -->
+        <div class="container">
 			<form action="" method="post" onsubmit="return false;">
 				<textarea id="drawingData" name="drawingData" style="margin:0;width:250px;height:250px;"></textarea>
 			</form>
-	</div>
+		</div>
+		<br>
+		<!-- Main sketchpad viewer -->
+		<div class="container">
+			<a href="javascript:void(0);" id="update_viewer">view</a><br>
+			<div id="viewer" style="height:467px; width:467px;"></div>
+		</div>
+    </div>
 
     </div>
 
@@ -98,9 +84,21 @@
 			// When the sketchpad changes, update the input field.
 		    sketchpad.change(function() {
 			    $("#drawingData").val(sketchpad.json());
+				update_actions();
 		    });
 			
 		    sketchpad.pen().color("#0f0");
+			
+			// Sketchpad viewer
+			var sketchpad_viewer = Raphael.sketchpad("viewer", {
+				width: 467,
+				height: 467,
+				editing: false
+			});
+
+			$("#update_viewer").click(function() {
+				sketchpad_viewer.json($('#drawingData').val());
+			});
 
             // This function toggles a button from "enabled" to "disabled"
 		    function enable(element, enable) {
@@ -112,8 +110,8 @@
 		    };
 
 		    function select(element1, element2) {
-			    $(element1).addClass("selected");
-			    $(element2).removeClass("selected");
+			    $(element1).addClass("active");
+			    $(element2).removeClass("active");
 		    }
 
 		    $("#editor_undo").click(function() {
@@ -154,34 +152,8 @@
 			    enable("#editor_clear", sketchpad.strokes().length > 0);
 		    }
 
-		    update_actions();
 	    });
     </script>
-
-    <!--
-
-	    <h2>My Sketch Editor</h2>
-	
-	    <div style="height:260px;" class="widget">
-		    <div id="sketchpad_editor"></div>
-	    </div>
-
-
-	    <form action="save.php" method="post">
-		    <input type="hidden" name="data" />
-		    <input type="submit" value="Save" />
-	    </form>
-	
-	    <script type="text/javascript">
-		    var paper = Raphael(10,10,300,300);
-		    var sketchpad_editor = Raphael.sketchpad(paper, {
-			    width: 400,
-			    height: 400,
-			    editing: true
-		    });
-	    </script>
-	
-    -->
 	
 
 </body>
