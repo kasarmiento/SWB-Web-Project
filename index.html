@@ -21,7 +21,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/raphael.min.js"></script>
     <script type="text/javascript" src="js/json2.js"></script>
-    <script type="text/javascript" src="js/raphael.sketchpad2.js"></script>
+    <script type="text/javascript" src="js/raphael.sketchpad.js"></script>
 
     
     <title>Identifying Microbiological Soil Crusts</title>
@@ -36,36 +36,35 @@
 	</div>
     <div class="jumbotron">
 		<!-- Main sketchpad editor -->
-        <div class="container">
-
-            <div id="canvas" style="height:467px; width:467px;"></div>
-
-			<div class="btn-group-vertical">
+        <div class="container text-center">
+            <div id="canvas"></div>
+		</div>
+		<br>
+		<div class="container text-center">
+			<div class="btn-group">
 				<button id="editor_pen" type="button" class="btn btn-default active">Pen</button>
 				<button id="editor_thin" type="button" class="btn btn-default active">Thin</button>
 				<button id="editor_thick" type="button" class="btn btn-default">Thick</button>
 			</div>
-			<br><br>
-			<div class="btn-group-vertical">
+			<div class="btn-group">
 				<button id="editor_eraser" type="button" class="btn btn-default">Eraser</button>
 				<button id="editor_undo" type="button" class="btn btn-default">Undo</button>
 				<button id="editor_redo" type="button" class="btn btn-default">Redo</button>
 			</div>
-			<br><br>
 			<button id="editor_clear" type="button" class="btn btn-default">Clear</button>
 		</div>
 		<br>
 		<!-- json result text box -->
-        <div class="container">
+        <div class="container text-center">
 			<form action="" method="post" onsubmit="return false;">
 				<textarea id="drawingData" name="drawingData" style="margin:0;width:250px;height:250px;"></textarea>
 			</form>
 		</div>
 		<br>
 		<!-- Main sketchpad viewer -->
-		<div class="container">
+		<div class="container text-center">
 			<a href="javascript:void(0);" id="update_viewer">view</a><br>
-			<div id="viewer" style="height:467px; width:467px;"></div>
+			<div id="viewer"></div>
 		</div>
     </div>
 
